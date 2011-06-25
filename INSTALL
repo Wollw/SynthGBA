@@ -1,0 +1,1 @@
+Make sure you have devkitARM and libgba from DevKitPro (http://www.devkitpro.org/) installed properly and then run "make".
