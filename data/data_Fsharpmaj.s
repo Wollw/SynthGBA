@@ -58,3 +58,4 @@ notesOct6_Fsharpmaj:
   .word   1995   @ Ds7
   .word   2001   @ Es7
   .word   2004   @ Fs7
+@ vim: syntax=armasm

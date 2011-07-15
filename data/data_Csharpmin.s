@@ -58,3 +58,4 @@ notesOct6_Csharpmin:
   .word   1974   @ A6
   .word   1982   @ B6
   .word   1989   @ Cs7
+@ vim: syntax=armasm

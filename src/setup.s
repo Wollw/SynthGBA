@@ -194,3 +194,5 @@ displayLengthFlag:
 	
 	pop  {r0-r12,lr}
 	bx lr
+
+@ vim: syntax=armasm

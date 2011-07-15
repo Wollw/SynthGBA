@@ -2058,3 +2058,4 @@ setupBit:
   .hword  0b0000000000000001 @ Don't change unless you want the cursor to be offset wrong
 soundRegUsage:
   .hword  0
+@ vim: syntax=armasm

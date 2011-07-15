@@ -1,10 +1,10 @@
+#include  "defines.h"
 .arm
 .align
 .text
 
 .global keyCheckSynth
 .global displayData
-#include  "defines.h"
 
 notePlay:
 	push  {r0-r12,lr}
@@ -954,3 +954,5 @@ displayKeyMin:
         streqh r0,[r4,r6]
         pop {r0-r5,r7-r12,lr}
         bx lr
+
+@ vim: syntax=armasm

@@ -58,3 +58,4 @@ notesOct6_Bmaj:
   .word   2009   @ Gs7
   .word   2013   @ As7
   .word   2015   @ B7
+@ vim: syntax=armasm

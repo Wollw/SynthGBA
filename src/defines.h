@@ -253,3 +253,4 @@
 
 @@  debug.s
 @.extern debug
+@ vim: syntax=armasm

@@ -57,3 +57,4 @@ notesOct6_Dflatmaj:
   .word   1978   @ Bb6
   .word   1985   @ C7
   .word   1989   @ Db7
+@ vim: syntax=armasm

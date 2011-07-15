@@ -57,3 +57,4 @@ notesOct6_Fmaj:
   .word   1992   @ D7
   .word   1998   @ E7
   .word   2001   @ F7
+@ vim: syntax=armasm

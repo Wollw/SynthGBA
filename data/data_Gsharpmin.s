@@ -58,3 +58,4 @@ notesOct6_Gsharpmin:
   .word   1998   @ E7
   .word   2004   @ Fs7
   .word   2009   @ Gs7
+@ vim: syntax=armasm

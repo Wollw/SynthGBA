@@ -57,3 +57,4 @@ notesOct6_Asharpmin:
   .word   2004   @ Fs7
   .word   2009   @ Gs7
   .word   2013   @ As7
+@ vim: syntax=armasm

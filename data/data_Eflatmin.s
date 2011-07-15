@@ -57,3 +57,4 @@ notesOct6_Eflatmin:
   .word   1982   @ Cb6
   .word   1989   @ Db7
   .word   1995   @ Eb7
+@ vim: syntax=armasm

@@ -59,3 +59,4 @@ notesOct6_Amaj:
   .word   2009   @ G#7
   .word   2011   @ A7
 
+@ vim: syntax=armasm

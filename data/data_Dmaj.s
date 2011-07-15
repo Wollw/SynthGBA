@@ -57,3 +57,4 @@ notesOct6_Dmaj:
   .word   1982    @ B6
   .word   1989    @ C#7
   .word   1992    @ D7
+@ vim: syntax=armasm

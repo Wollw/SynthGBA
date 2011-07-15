@@ -58,3 +58,4 @@ notesOct6_Aflatmin:
   .word   1998   @ Fb7
   .word   2004   @ Gb7
   .word   2009   @ Ab7
+@ vim: syntax=armasm

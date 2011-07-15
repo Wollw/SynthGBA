@@ -57,3 +57,4 @@ notesOct6_Bflatmin:
   .word   2004   @ Gb7
   .word   2009   @ Ab7
   .word   2013   @ Bb7
+@ vim: syntax=armasm

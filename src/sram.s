@@ -1,12 +1,15 @@
+@ Code that reads from SRAM should be stored in Work RAM
 .section .iwram, "ax", %progbits
+#include  "defines.h"
 .arm
 .align
 .text
+
 .global saveSettings
 .global loadSettings
-#include  "defines.h"
 
-saveSettings:           @ save synth settings
+@ Save program settings to SRAM byte by byte
+saveSettings:
   push  {r0-r12,lr}
   mov   r0, #SRAM
   ldr   r1, =notesettings	@ note setting save
@@ -25,7 +28,8 @@ saveSettings:           @ save synth settings
   pop   {r0-r12,lr}
   bx  lr
   
-loadSettings:           @ load synth settings
+@ Load the program settings from SRAM byte by byte
+loadSettings:
   push  {r0-r12,lr}
   mov   r1, #SRAM
   ldr   r0, =notesettings  @ load note settings
@@ -54,3 +58,5 @@ loadSettings:           @ load synth settings
  
   pop   {r0-r12,lr}
   bx  lr
+
+@ vim: syntax=armasm

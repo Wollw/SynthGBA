@@ -57,3 +57,4 @@ notesOct6_Csharpmaj:
   .word   1978   @ As6
   .word   1985   @ Bs6
   .word   1989   @ Cs7
+@ vim: syntax=armasm

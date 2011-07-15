@@ -58,3 +58,4 @@ notesOct6_Emaj:
   .word   1989   @ Cs7
   .word   1995   @ Ds7
   .word   1998   @ E7
+@ vim: syntax=armasm
