@@ -10,6 +10,10 @@
 @@
 showText:
 	push	{r0-r10,r12,lr}
+
+	@ Wait for VBlank before we continue
+	swi 0x50000
+
 	mov		r0, #PAL_RAM
 	ldr		r1, =fontPAL
 	mov		r2, #1

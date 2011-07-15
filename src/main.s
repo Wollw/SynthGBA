@@ -56,11 +56,7 @@ setupLoop:
 	@ r11 holds the Background map to use
 	@ 0 holds the tile data for the setup screen
 	mov r11, #0
-	bl	updateSetup					 @ Update the visual of the register based on notesettings	
-
-	@ Wait for VBlank Interrupt before we draw
-	swi 0x50000
-
+	bl	updateSetup	 @ Update the visual of the register based on notesettings	
 	bl showText
 	bl	keyCheckSetup
 	
@@ -71,7 +67,6 @@ synth:
 	bl	saveSettings
 	mov r11,	#1		@ BG map Flag
 synthLoop:
-	swi 0x50000	 @ wait for vblank software interrupt		
 	bl showText
 	bl keyCheckSynth
 	bl displayData
