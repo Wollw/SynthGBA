@@ -11,26 +11,26 @@ cursorLocate:                       @ returns address of ^ in r5
   push  {r0-r4,r6-r12,lr}
   ldr r5, =setupText                @ Load setup bg map
 cursorLocateLoop:
-  ldrh r0,[r5],#2
+  ldrb r0,[r5],#1
   cmp  r0,#94
   bne cursorLocateLoop
-  sub r5, r5, #2
+  sub r5, r5, #1
   pop   {r0-r4,r6-r12,lr}
   bx  lr
 
 cursorJump:
   push	{r0-r12}
   
-  mov	r0,#32
-  strh  r0,[r5]	@ erase cursor
+  mov	r0,#14
+  strb  r0,[r5]	@ erase cursor
   
   cmp	r4,#4
-  addeq	r5,r5,#30 @redraw in proper place
+  addeq	r5,r5,#15 @redraw in proper place
   moveq r2,#0x0001
-  subne r5,r5,#30
+  subne r5,r5,#15
   movne r2,#0x8000
   mov	r0,#94
-  strh	r0,[r5]
+  strb	r0,[r5]
   strh  r2,[r1]
 
 
@@ -56,15 +56,15 @@ cursorMove:
   cmpeq r2, #0x0001   @ |
   beq cursorJump      @ /
   
-  mov   r0, #32        @ erase current location of ^
-  strh  r0, [r5]       @ /
+  mov   r0, #16        @ erase current location of ^
+  strb  r0, [r5]       @ /
   cmp   r4, #4         @ Draw new position of ^ and keep track of current bit
-  subeq r5, r5, #2     @ |
+  subeq r5, r5, #1     @ |
   moveq r2, r2, LSL #1 @ |
-  addne r5, r5, #2     @ |
+  addne r5, r5, #1     @ |
   movne r2, r2, LSR #1 @ |
   mov   r0, #94        @ |
-  strh  r0, [r5]       @ |
+  strb  r0, [r5]       @ |
   strh  r2, [r1]       @ /
 
   
@@ -187,10 +187,10 @@ displayLengthFlag:
 	ldrh r3,[r3,#4]
 	cmp r3,#0
 	ldr r0,=setupText
-	ldr r1,=1216
-	ldrneh r2,=76
-	ldreqh r2,=32
-	strh r2,[r0,r1]
+	ldr r1,=608	@ magic number for length status character in tile map
+	ldrneb r2,=76
+	ldreqb r2,=32
+	strb r2,[r0,r1]
 	
 	pop  {r0-r12,lr}
 	bx lr

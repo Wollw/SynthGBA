@@ -102,11 +102,11 @@ keyCheckSynth:             @ Load keycheck routine and also call respective hand
 @@ While Select is held settings can be changed
 settingChange: 
   ldr r0,=0b1100000100
-  ands r0,r1,r0		  @ A+B+start+select = Reset
+  ands r0,r1,r0		  @ L+R+Select = Setup Menu
   swieq 0x00000
  
   mov r4, #36
-  ands r0, r1, #0b1		@ A = toggle Major/Minor
+  ands r0, r1, #0b1000		@ A = toggle Major/Minor
   blne keyClear
   bleq toggleMajMin 
 
@@ -788,11 +788,11 @@ displayData:			@ edit synthText to show Key and Oct
 
 	ldr r4,=synthText
 		
-	add  r6,r6,#2		@ inc location
+	add  r6,r6,#1		@ inc location
 	ldr  r0,=octave		@ get address of octave
 	ldrh r0,[r0]		@ load octave's content
 	add  r0,r0,#48		@ add 0's tile number
-	strh r0,[r4,r6]		@ store it
+	strb r0,[r4,r6]		@ store it
 	@@ if key is major display maj
 	ldr r0,=key
 	ldr r0,[r0,#4]
@@ -805,29 +805,29 @@ displayData:			@ edit synthText to show Key and Oct
 
 displayMaj:	@ display "maj" r4 must be address of synthText r6 must be current map index
 	push {r0-r5,r7-r12,lr}
-	add  r6,r6,#2 		@ load location to place tile
+	add  r6,r6,#1 		@ load location to place tile
 	ldrh r0,=109 		@ load index for 'm'
-	strh r0,[r4,r6]		@ change tile map
-	add r6,r6,#2
+	strb r0,[r4,r6]		@ change tile map
+	add r6,r6,#1
 	ldrh r0,=97		@ load index for 'a'
-	strh r0,[r4,r6] 	@ change tile map
-	add r6,r6,#2
+	strb r0,[r4,r6] 	@ change tile map
+	add r6,r6,#1
 	ldrh r0,=106		@ load index for 'j'
-	strh r0,[r4,r6]		@ change tile map
+	strb r0,[r4,r6]		@ change tile map
 	pop {r0-r5,r7-r12,lr}
 	bx lr
 
-displayMin:     @ same as displayMaj
+displayMin:     @ same as displayMaj but for minor scales
         push {r0-r5,r7-r12,lr}
-        add  r6,r6,#2           @ load location to place tile
+        add  r6,r6,#1           @ load location to place tile
         ldrh r0,=109            @ load index for 'm'
-        strh r0,[r4,r6]         @ change tile map
-        add  r6,r6,#2           @ inc location
+        strb r0,[r4,r6]         @ change tile map
+        add  r6,r6,#1           @ inc location
         ldrh r0,=105            @ load index for 'i'
-        strh r0,[r4,r6]         @ change tile map
-        add  r6,r6,#2           @ inc location
+        strb r0,[r4,r6]         @ change tile map
+        add  r6,r6,#1           @ inc location
         ldrh r0,=110            @ load index for 'n'
-        strh r0,[r4,r6]         @ change tile map
+        strb r0,[r4,r6]         @ change tile map
         pop {r0-r5,r7-r12,lr}
         bx lr
 
@@ -877,25 +877,25 @@ displayKeyMaj:
 	ldreqh r0,=67		@ Cbmaj
 	moveq	r3,#2		@ flat flag
 	
-	ldr  r6,=1216		@ Store the tile id
-	strh r0,[r4,r6]
+	ldr  r6,=608		@ Store the tile id
+	strb r0,[r4,r6]
 	
-	add r6,r6,#2
-	ldrh r0,=32
-	strh r0,[r4,r6]
+	add r6,r6,#1
+	ldrb r0,=32
+	strb r0,[r4,r6]
 			@@ Display # or b if sharp or flat
 	cmp r3,#1	
-	ldreqh r0,=128	@@ sharp sign
-	streqh r0,[r4,r6]
-        cmp r3,#2
-        ldreqh r0,=129	@@ flat sign
-        streqh r0,[r4,r6]
+	ldreqb r0,=128	@@ sharp sign
+	streqb r0,[r4,r6]
+    cmp r3,#2
+    ldreqb r0,=129	@@ flat sign
+    streqb r0,[r4,r6]
 	pop {r0-r5,r7-r12,lr}
 	bx lr
 
 displayKeyMin:
         push {r0-r5,r7-r12,lr}
-	ldr r4,=synthText
+		ldr r4,=synthText
         ldr r0,=key
         ldr r0,[r0]
         cmp r0,#0
@@ -939,20 +939,20 @@ displayKeyMin:
         ldreqh r0,=65           @ Ab
         moveq   r3,#2           @ flat flag
 
-	ldr  r6,=1216		@ Store the tile id
-	strh r0,[r4,r6]
+	ldr  r6,=608		@ Store the tile id
+	strb r0,[r4,r6]
 	
-	add r6,r6,#2
-	ldrh r0,=32
-	strh r0,[r4,r6]
+	add r6,r6,#1
+	ldrb r0,=32
+	strb r0,[r4,r6]
 			@@ Display # or b if sharp or flat
 	cmp r3,#1	
-	ldreqh r0,=128	@@ sharp sign
-	streqh r0,[r4,r6]
-        cmp r3,#2
-        ldreqh r0,=129	@@ flat sign
-        streqh r0,[r4,r6]
-        pop {r0-r5,r7-r12,lr}
-        bx lr
+	ldreqb r0,=128	@@ sharp sign
+	streqb r0,[r4,r6]
+    cmp r3,#2
+    ldreqb r0,=129	@@ flat sign
+    streqb r0,[r4,r6]
+    pop {r0-r5,r7-r12,lr}
+    bx lr
 
 @ vim: syntax=armasm

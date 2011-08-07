@@ -48,7 +48,7 @@ textMap:
 	mov r12,	#1024
 @ Load the tile map into VRAM
 textMapLoop:
-	ldrh	r3, [r1],#2
+	ldrb	r3, [r1],#1
 	strh	r3, [r0],#2
 	subs	r12, r12,#1
 	bne textMapLoop
@@ -59,10 +59,10 @@ binaryLocate:											 @ returns address of b in r5
 	push	{r0-r4,r6-r12,lr}
 	ldr r5, =setupText								@ Load setup bg map
 binaryLocateLoop:
-	ldrh r0,[r5],#2
+	ldrb r0,[r5],#1
 	cmp	r0,#98
 	bne binaryLocateLoop
-	sub r5, r5, #2
+	sub r5, r5, #1
 	pop	 {r0-r4,r6-r12,lr}
 	bx	lr
 
@@ -72,7 +72,7 @@ updateSetup:					@ updates the bg map to show the correct bits on the screen
 	ldrh	r2,[r0]
 	eor	 r1, r1, r1
 	bl		binaryLocate
-	add	 r5, r5, #32		 @ r5 is bit 0, sub 2 to move down a bit
+	add	 r5, r5, #16		 @ r5 is bit 0, sub 2 to move down a bit
 updateLoop:
 
 	and	 r3, r2, #1			@ get bit to test
@@ -80,12 +80,12 @@ updateLoop:
 	tst	 r3, #1
 	movne r4, #49				 @ 49 is the code for "1"
 	moveq r4, #48				 @ 48 is the code for "0"
-	strh	r4, [r5]				@ update the bg map
+	strb	r4, [r5]				@ update the bg map
 
-	sub	 r5, r5, #2			@ next entry to update
+	sub	 r5, r5, #1			@ next entry to update
 	add	 r1, #1
 	cmp	 r1, #16
-	
+
 	bne updateLoop
 
 	bl displayLengthFlag
